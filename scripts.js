@@ -20,7 +20,13 @@ function alertar(event){
 //     if(resultado == 0){
 //         alert("este número é par!");
 // }
-  
+
+   const url = `https://viacep.com.br/ws/${cep.value}/json`;
+
+   fetch(url)
+      .then(resposta=>resposta.json())
+      .then(dados=>alert(dados.bairro)) 
+
   saida.innerText = "Nome: " + nome.value +
                     "\n Email: " + email.value +
                     "\n Telefone: " + telefone.value +
