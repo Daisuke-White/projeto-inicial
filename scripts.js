@@ -23,9 +23,21 @@ function alertar(event){
 
    const url = `https://viacep.com.br/ws/${cep.value}/json`;
 
-   fetch(url)
-      .then(resposta=>resposta.json())
-      .then(dados=>alert(dados.bairro)) 
+   fetch(url).then(function(resposta){
+      return resposta.json();
+   })
+   .then(
+      function(dadosDoEndereco){
+         logradouro.value= dadosDoEndereco.logradouro;
+         bairro.value = dadosDoEndereco.bairro;
+         cidade.value = dadosDoEndereco.localidade;
+         estado.value = dadosDoEndereco.uf;
+         complemento.value = dadosDoEndereco.complemento;
+      }
+   )
+   .catch(function(e){
+      alert(e.message());
+   });
 
   saida.innerText = "Nome: " + nome.value +
                     "\n Email: " + email.value +
