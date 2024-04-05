@@ -21,6 +21,16 @@ function alertar(event){
 //         alert("este número é par!");
 // }
 
+// Validação dos dados
+
+if(cep.value.length < 8){
+   alert('Entre com um CEP válido');
+   return;
+}
+
+// Formatar os dados
+cep.value = cep.value.replace('-','');
+
    const url = `https://viacep.com.br/ws/${cep.value}/json`;
 
    fetch(url).then(function(resposta){
@@ -33,23 +43,29 @@ function alertar(event){
          cidade.value = dadosDoEndereco.localidade;
          estado.value = dadosDoEndereco.uf;
          complemento.value = dadosDoEndereco.complemento;
+
+         saidaDeDados(); //Chamada da função
       }
    )
    .catch(function(e){
       alert(e.message());
-   });
+   }); 
 
-  saida.innerText = "Nome: " + nome.value +
-                    "\n Email: " + email.value +
-                    "\n Telefone: " + telefone.value +
-                    "\n CEP: " + cep.value +
-                    "\n Logradouro: " + logradouro.value +
-                    "\n Numerro: " + numero.value +
-                    "\n Complemento: " + complemento.value +
-                    "\n Bairro: " + bairro.value +
-                    "\n Cidade: " + cidade.value +
-                    "\n Estado: " + estado.value ;
+  
 
+}
 
+function saidaDeDados(){
+
+   saida.innerText = "Nome: " + nome.value +
+   "\n Email: " + email.value +
+   "\n Telefone: " + telefone.value +
+   "\n CEP: " + cep.value +
+   "\n Logradouro: " + logradouro.value +
+   "\n Numerro: " + numero.value +
+   "\n Complemento: " + complemento.value +
+   "\n Bairro: " + bairro.value +
+   "\n Cidade: " + cidade.value +
+   "\n Estado: " + estado.value ;
 
 }
